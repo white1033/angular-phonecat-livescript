@@ -71,11 +71,12 @@ gulp.task 'jade:app' ->
     .pipe gulp.dest '_public'
     .pipe livereload!
 
+var dev-server
 gulp.task 'server' ->
   dev-app = connect!use connect.logger \dev
     .use connect.static '_public'
 
-  dev-server = require 'http' .create-server dev-app .listen 3333
+  dev-server := require 'http' .create-server dev-app .listen 3333
 
   dev-server.on \error ->
     gutil.log 'Unable to start server!'
@@ -99,3 +100,14 @@ gulp.task 'test:unit' <[build]> ->
       throw it
 
 gulp.task 'build' <[template bower assets js:vendor js:app css]>
+
+gulp.task 'webdriver_update' webdriver_update
+
+gulp.task 'protractor' <[server webdriver_update]> ->
+  gulp.src 'test/e2e/app/*.ls'
+    .pipe protractor config-file: 'test/protractor.conf.ls'
+    .on \error ->
+      throw it
+
+gulp.task 'test:e2e' <[protractor]> ->
+  dev-server.close!

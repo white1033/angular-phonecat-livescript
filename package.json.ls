@@ -15,6 +15,7 @@ scripts:
   build: 'gulp --require LiveScript build server'
   start: 'gulp --require LiveScript dev'
   test: 'gulp --require LiveScript build test:unit'
+  protractor: 'gulp --require LiveScript test:e2e'
 dependencies: {}
 devDependencies:
   jade: '1.3.x'
