@@ -6,7 +6,6 @@ gutil = gulp-util
 {protractor, webdriver_update} = require \gulp-protractor
 livereload-server = require('tiny-lr')!
 livereload = -> gulp-livereload livereload-server
-
 livescript = require \gulp-livescript
 
 gulp.task 'bower' ->
@@ -86,11 +85,11 @@ gulp.task 'server' ->
 
 gulp.task 'test:unit' <[build]> ->
   gulp.src [
-    * "_public/js/vendor.js"
-    * "_public/js/partials.js"
-    * "_public/js/app.js"
-    * "bower_components/angular-mocks/angular-mocks.js"
-    * "test/unit/**/*.spec.ls"
+    '_public/js/vendor.js'
+    '_public/js/partials.js'
+    '_public/js/app.js'
+    'bower_components/angular-mocks/angular-mocks.js'
+    'test/unit/**/*.spec.ls'
   ]
     .pipe gulp-karma do
       config-file: 'test/karma.conf.ls'
