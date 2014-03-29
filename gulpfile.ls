@@ -1,4 +1,4 @@
-require! <[gulp gulp-util gulp-less gulp-mocha gulp-karma gulp-livereload]>
+require! <[gulp gulp-util gulp-stylus gulp-mocha gulp-karma gulp-livereload]>
 require! <[gulp-bower gulp-bower-files gulp-filter]>
 require! <[gulp-angular-templatecache gulp-jade]>
 require! <[gulp-concat streamqueue connect]>
@@ -39,14 +39,15 @@ gulp.task 'js:vendor' <[bower]> ->
 
 gulp.task 'css' ->
   bower = gulp-bower-files!
-    .pipe gulp-filter -> it.path is /\.less$/
-    .pipe gulp-less!
+    .pipe gulp-filter -> it.path is /\.styl$/
+    .pipe gulp-stylus use: <[nib]>
 
-  less = gulp.src 'app/styles/**/*.less'
-    .pipe gulp-less!
+  styl = gulp.src 'app/styles/**/*.styl'
+    .pipe gulp-filter -> it.path isnt /_[^/]+\.styl$/
+    .pipe gulp-stylus use: <[nib]>
 
   streamqueue { +objectMode }
-    .done bower, less
+    .done bower, styl
     .pipe gulp-concat 'app.css'
     .pipe gulp.dest '_public/css'
     .pipe livereload!
@@ -61,7 +62,7 @@ gulp.task 'dev' <[server template js:app js:vendor css assets]> ->
     return gutil.log it if it
   gulp.watch ['app/partials/*.jade'] <[template]>
   gulp.watch ['app/**/*.ls'] <[js:app]>
-  gulp.watch ['app/styles/**/*.less'] <[css]>
+  gulp.watch ['app/styles/**/*.styl'] <[css]>
   gulp.watch ['app/index.jade'] <[jade:app]>
 
 gulp.task 'jade:app' ->

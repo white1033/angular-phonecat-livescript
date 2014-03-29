@@ -40,7 +40,7 @@ devDependencies:
   'gulp-exec': '~1.0.4'
   'gulp-protractor': '^0.0.7'
   'gulp-livescript': '~0.1.1'
-  'gulp-less': '~1.2.3'
+  'gulp-stylus': '~0.1.0'
   'gulp-concat': '~2.1.7'
   'gulp-jade': '~0.4.1'
   'gulp-angular-templatecache': '^1.1.0'
