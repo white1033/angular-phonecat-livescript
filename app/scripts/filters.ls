@@ -2,6 +2,6 @@
 
 # Filters
 
-angular.module 'app.filters' []
-.filter \interpolate <[version]> ++ (version) ->
-    (text) -> String(text)replace /\%VERSION\%/mg version
+angular.module 'phonecatFilters' []
+  .filter 'checkmark' ->
+    -> if it then '\u2713' else '\u2718'

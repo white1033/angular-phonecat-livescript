@@ -1,4 +1,4 @@
-angular.module 'phonecatApp' <[ ngRoute phonecatControllers partials ]>
+angular.module 'phonecatApp' <[ ngRoute phonecatControllers partials phonecatFilters ]>
   .config <[ $routeProvider ]> ++ ($routeProvider) !->
     $routeProvider
       .when '/phones' do

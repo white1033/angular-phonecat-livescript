@@ -1,15 +1,12 @@
 'use strict'
 
 # jasmine specs for filters go here
-describe "filter" ->
-  beforeEach module "app.filters"
+describe "filter" (,) !->
 
-  describe "interpolate" (,) ->
+  beforeEach module "phonecatFilters"
 
-    beforeEach(module(($provide) !->
-      $provide.value "version" "TEST_VER"
-    ))
+  describe "checkmark" (,) !->
 
-    it "should replace VERSION" inject((interpolateFilter) ->
-      interpolateFilter 'before %VERSION% after' .should.equal 'before TEST_VER after'
-    )
+    it 'should convert boolean value to unicode checkmark or cross' inject (checkmarkFilter) !->
+      expect(checkmarkFilter true).to.equal '\u2713'
+      expect(checkmarkFilter false).to.equal '\u2718'
