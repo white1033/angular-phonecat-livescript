@@ -32,6 +32,7 @@ html(lang='en', ng-app='phonecatApp')
           div.span10
             // Body content
             ul.phones
-              li(ng-repeat="phone in phones | filter:query | orderBy:orderProp")
-                span {{phone.name}}
+              li(ng-repeat="phone in phones | filter:query | orderBy:orderProp").thumbnail
+                a(href="#/phones/{{phone.id}}", class="thumb"): img(ng-src="{{phone.imageUrl}}")
+                a(href="#/phones/{{phone.id}}") {{phone.name}}
                 p {{phone.snippet}}

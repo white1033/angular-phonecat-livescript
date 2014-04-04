@@ -40,3 +40,9 @@ describe 'my app' (,) !->
       "MOTOROLA XOOM\u2122"
       "Motorola XOOM\u2122 with Wi-Fi"
     ]
+  it 'should render phone specific links' !->
+    query = element by.model 'query'
+    query.sendKeys 'nexus'
+    element(by.css '.phones li a').click!
+    browser.getLocationAbsUrl!then (url) ->
+      expect(url.split '#' .1).toBe '/phones/nexus-s'
