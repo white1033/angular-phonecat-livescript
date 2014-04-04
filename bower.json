@@ -28,11 +28,6 @@
     },
     "angular-mocks": {
       "main": "README.md"
-    },
-    "bootstrap-less": {
-      "ignore": [
-        "*"
-      ]
     }
   }
 }

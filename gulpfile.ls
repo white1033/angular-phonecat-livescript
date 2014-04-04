@@ -56,7 +56,7 @@ gulp.task 'assets' ->
   gulp.src 'app/assets/**'
     .pipe gulp.dest '_public'
 
-gulp.task 'dev' <[server template js:app js:vendor css assets]> ->
+gulp.task 'dev' <[jade:app server template js:app js:vendor css assets]> ->
   LIVERELOADPORT = 35729
   livereload-server.listen LIVERELOADPORT, ->
     return gutil.log it if it

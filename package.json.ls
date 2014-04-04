@@ -13,7 +13,7 @@ engines:
 scripts:
   prepublish: 'lsc -c package.json.ls && lsc -c bower.json.ls'
   build: 'gulp --require LiveScript build server'
-  start: 'gulp --require LiveScript dev'
+  dev: 'gulp --require LiveScript dev'
   test: 'gulp --require LiveScript build test:unit'
   protractor: 'gulp --require LiveScript test:e2e'
 dependencies: {}
