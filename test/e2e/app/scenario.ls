@@ -62,3 +62,13 @@ describe 'PhoneCat App' (,) !->
 
     it 'should display nexus-s page' ->
       expect(element(by.binding 'phone.name').getText!).toBe 'Nexus S'
+
+    it 'should display the first phone image as the main phone image' !->
+      expect(element by.css 'img.phone' .getAttribute 'src').toMatch /img\/phones\/nexus-s.0.jpg/
+
+    it 'should swap main image if a thumbnail image is clicked on' !->
+      element(by.css '.phone-thumbs li:nth-child(3) img').click!
+      expect(element by.css 'img.phone' .getAttribute 'src').toMatch /img\/phones\/nexus-s.2.jpg/
+
+      element(by.css '.phone-thumbs li:nth-child(1) img').click!
+      expect(element by.css 'img.phone' .getAttribute 'src').toMatch /img\/phones\/nexus-s.0.jpg/
