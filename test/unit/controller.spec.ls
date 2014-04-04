@@ -2,9 +2,10 @@
 
 describe "PhoneCat controllers" !->
 
+  beforeEach module "phonecatApp"
+
   describe "PhoneListCtrl" (,) !->
     var scope, ctrl, $httpBackend
-    beforeEach module "phonecatApp"
 
     beforeEach inject (_$httpBackend_, $rootScope, $controller) !->
       $httpBackend := _$httpBackend_
@@ -28,4 +29,18 @@ describe "PhoneCat controllers" !->
       expect scope.orderProp .to.equal 'age'
 
   describe 'PhoneDetailCtrl' (,) !->
+    var scope, $httpBackend, ctrl
 
+    beforeEach inject (_$httpBackend_, $rootScope, $routeParams, $controller) !->
+      $httpBackend := _$httpBackend_
+      $httpBackend.expectGET 'phones/xyz.json' .respond name: 'phone xyz'
+
+      $routeParams.phoneId = 'xyz'
+      scope := $rootScope.$new!
+      ctrl := $controller 'PhoneDetailCtrl' $scope: scope
+
+    it 'should fetch phone detail' !->
+      expect scope.phone .to.be.undefined
+      $httpBackend.flush!
+
+      expect scope.phone .to.eql name: 'phone xyz'

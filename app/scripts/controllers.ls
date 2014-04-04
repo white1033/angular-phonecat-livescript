@@ -7,5 +7,6 @@ angular.module 'phonecatControllers' []
 
     $scope.orderProp = 'age'
 
-  .controller 'PhoneDetailCtrl' <[ $scope $routeParams ]> ++ ($scope, $routeParams) ->
-    $scope.phoneId = $routeParams.phoneId
+  .controller 'PhoneDetailCtrl' <[ $scope $routeParams $http ]> ++ ($scope, $routeParams, $http) ->
+    $http.get "phones/#{$routeParams.phoneId}.json" .success (data) !->
+      $scope.phone = data
