@@ -18,3 +18,25 @@ describe 'my app' (,) !->
     query.clear!
     query.sendKeys 'motorola'
     expect phoneList.count! .toBe 2
+
+  it 'should be possible to control phone order via the drop down select box' !->
+    phoneNameColumn = element.all(by.repeater 'phone in phones' .column '{{phone.name}}')
+    query = element by.model 'query'
+
+    getNames = ->
+      phoneNameColumn.map (elm) ->
+        elm.getText!
+
+    query.sendKeys 'tablet' # let's narrow the dataset to make the test assertions shorter
+
+    expect getNames! .toEqual [
+      "Motorola XOOM\u2122 with Wi-Fi"
+      "MOTOROLA XOOM\u2122"
+    ]
+
+    element(by.model 'orderProp').findElement(by.css 'option[value="name"').click!
+
+    expect getNames! .toEqual [
+      "MOTOROLA XOOM\u2122"
+      "Motorola XOOM\u2122 with Wi-Fi"
+    ]

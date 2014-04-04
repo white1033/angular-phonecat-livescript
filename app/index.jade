@@ -24,10 +24,14 @@ html(lang='en', ng-app='phonecatApp')
 
             | Search:
             input(ng-model="query")
+            | Sort by:
+            select(ng-model="orderProp")
+              option(value="name") Alphabetical
+              option(value="age") Newest
 
           div.span10
             // Body content
             ul.phones
-              li(ng-repeat="phone in phones | filter:query")
-                | {{phone.name}}
+              li(ng-repeat="phone in phones | filter:query | orderBy:orderProp")
+                span {{phone.name}}
                 p {{phone.snippet}}
