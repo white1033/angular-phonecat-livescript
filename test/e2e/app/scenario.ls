@@ -15,6 +15,6 @@ describe 'my app' (,) !->
     query.sendKeys 'nexus'
     expect phoneList.count! .toBe 1
 
-    # query.clear!
-    # query.sendKeys 'motorola'
-    # expect phoneList.count! .toBe 2
+    query.clear!
+    query.sendKeys 'motorola'
+    expect phoneList.count! .toBe 2
