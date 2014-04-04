@@ -14,7 +14,7 @@ dependencies:
   'angular-resource': '1.2.12'
   'angular-cookies': '1.2.12'
   'angular-mocks': '1.2.12'
-  'angular-ui-router': '0.2.10'
+  'angular-route': '1.2.12'
 overrides:
   angular:
     dependencies: jquery: '*'
