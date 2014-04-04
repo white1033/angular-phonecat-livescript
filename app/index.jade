@@ -17,7 +17,17 @@ html(lang='en', ng-app='phonecatApp')
     script(src='/js/partials.js')
     script(src='/js/app.js')
     body(ng-controller='PhoneListCtrl')
-      ul
-        li(ng-repeat="phone in phones")
-          | {{phone.name}}
-          p {{phone.snippet}}
+      div.container-fluid
+        div.row-fluid
+          div.span2
+            // Sidebar content
+
+            | Search:
+            input(ng-model="query")
+
+          div.span10
+            // Body content
+            ul.phones
+              li(ng-repeat="phone in phones | filter:query")
+                | {{phone.name}}
+                p {{phone.snippet}}

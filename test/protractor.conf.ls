@@ -13,8 +13,3 @@ exports.config = do
   specs:
     'e2e/app/*.ls'
     ...
-
-  framework: 'mocha'
-
-  mocha-opts:
-    reporter: 'spec'
