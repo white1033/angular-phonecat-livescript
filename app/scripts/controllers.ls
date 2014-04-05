@@ -1,16 +1,13 @@
 'use strict'
 
 angular.module 'phonecatControllers' []
-  .controller 'PhoneListCtrl' <[ $scope $http ]> ++ ($scope, $http) !->
-    $http.get 'phones/phones.json' .success (data) ->
-      $scope.phones = data
-
+  .controller 'PhoneListCtrl' <[ $scope Phone ]> ++ ($scope, Phone) !->
+    $scope.phones = Phone.query!
     $scope.orderProp = 'age'
 
-  .controller 'PhoneDetailCtrl' <[ $scope $routeParams $http ]> ++ ($scope, $routeParams, $http) ->
-    $http.get "phones/#{$routeParams.phoneId}.json" .success (data) !->
-      $scope.phone = data
-      $scope.mainImageUrl = data.images.0
+  .controller 'PhoneDetailCtrl' <[ $scope $routeParams Phone ]> ++ ($scope, $routeParams, Phone) ->
+    $scope.phone = Phone.get phoneId: $routeParams.phoneId, (phone) !->
+      $scope.mainImageUrl = phone.images.0
 
     $scope.setImage = (imageUrl) !->
       $scope.mainImageUrl = imageUrl

@@ -2,7 +2,12 @@
 
 describe "PhoneCat controllers" !->
 
+  beforeEach !->
+    chai.Assertion.addMethod 'equalData' (matcher) ->
+      @assert angular.equals @_obj, matcher
+
   beforeEach module "phonecatApp"
+  beforeEach module 'phonecatServices'
 
   describe "PhoneListCtrl" (,) !->
     var scope, ctrl, $httpBackend
@@ -17,10 +22,10 @@ describe "PhoneCat controllers" !->
       ctrl := $controller "PhoneListCtrl" $scope: scope
 
     it 'should create "phones" model with 2 phones fetched from xhr' !->
-      expect scope.phones .to.be.undefined
+      expect scope.phones .to.be.equalData []
       $httpBackend.flush!
 
-      expect scope.phones .to.eql [
+      expect(scope.phones).to.be.equalData [
         {name: 'Nexus S'}
         {name: 'Motorola DROID'}
       ]
@@ -45,7 +50,7 @@ describe "PhoneCat controllers" !->
       ctrl := $controller 'PhoneDetailCtrl' $scope: scope
 
     it 'should fetch phone detail' !->
-      expect scope.phone .to.be.undefined
+      expect scope.phone .to.be.equalData {}
       $httpBackend.flush!
 
-      expect scope.phone .to.eql xyzPhoneData!
+      expect scope.phone .to.be.equalData xyzPhoneData!

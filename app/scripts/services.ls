@@ -2,7 +2,11 @@
 
 # Services
 
-# Create an object to hold the module.
-mod = version: -> "0.1"
-
-angular.module 'app.services' [] .factory mod
+angular.module 'phonecatServices' <[ ngResource ]>
+  .factory 'Phone' <[ $resource ]> ++ ($resource) ->
+    $resource 'phones/:phoneId.json' {} do
+      query:
+        method: 'GET'
+        params:
+          phoneId: 'phones'
+        isArray: true
