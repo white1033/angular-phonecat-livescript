@@ -1,10 +1,13 @@
-angular.module 'phonecatApp' <[ ngRoute phonecatControllers partials phonecatFilters phonecatServices ]>
-  .config <[ $routeProvider ]> ++ ($routeProvider) !->
-    $routeProvider
-      .when '/phones' do
+angular.module 'phonecatApp' <[ ui.router phonecatControllers partials phonecatFilters phonecatServices ]>
+  .config <[ $stateProvider $urlRouterProvider ]> ++ ($stateProvider, $urlRouterProvider) !->
+    $urlRouterProvider.otherwise '/phones'
+
+    $stateProvider
+      .state 'phone-list' do
+        url: '/phones'
         templateUrl: 'partials/phone-list.html'
         controller: 'PhoneListCtrl'
-      .when '/phones/:phoneId' do
+      .state 'phone-detail' do
+        url: '/phones/:phoneId'
         templateUrl: 'partials/phone-detail.html'
         controller: 'PhoneDetailCtrl'
-      .otherwise redirectTo: '/phones'

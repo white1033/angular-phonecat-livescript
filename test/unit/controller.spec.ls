@@ -41,11 +41,11 @@ describe "PhoneCat controllers" !->
         'image/url1.png'
         'image/url2.png'
 
-    beforeEach inject (_$httpBackend_, $rootScope, $routeParams, $controller) !->
+    beforeEach inject (_$httpBackend_, $rootScope, $stateParams, $controller) !->
       $httpBackend := _$httpBackend_
       $httpBackend.expectGET 'phones/xyz.json' .respond xyzPhoneData!
 
-      $routeParams.phoneId = 'xyz'
+      $stateParams.phoneId = 'xyz'
       scope := $rootScope.$new!
       ctrl := $controller 'PhoneDetailCtrl' $scope: scope
 

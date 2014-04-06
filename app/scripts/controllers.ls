@@ -5,8 +5,8 @@ angular.module 'phonecatControllers' []
     $scope.phones = Phone.query!
     $scope.orderProp = 'age'
 
-  .controller 'PhoneDetailCtrl' <[ $scope $routeParams Phone ]> ++ ($scope, $routeParams, Phone) ->
-    $scope.phone = Phone.get phoneId: $routeParams.phoneId, (phone) !->
+  .controller 'PhoneDetailCtrl' <[ $scope $stateParams Phone ]> ++ ($scope, $stateParams, Phone) ->
+    $scope.phone = Phone.get phoneId: $stateParams.phoneId, (phone) !->
       $scope.mainImageUrl = phone.images.0
 
     $scope.setImage = (imageUrl) !->
